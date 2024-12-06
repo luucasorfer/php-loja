@@ -1,0 +1,288 @@
+/* Estilização básica */
+body {
+  margin: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
+  color: #333;
+  line-height: 1.6;
+}
+
+h1 {
+  text-align: center;
+  color: #444;
+  margin: 20px 0;
+}
+
+h2 {
+  text-align: center;
+  margin-top: 30px;
+}
+
+/* Formulário */
+
+/* Estilo para o conteúdo normal da página */
+.content {
+  position: relative;
+  z-index: 1; /* Fica atrás da máscara */
+  left: 12%;
+  width: 85%;
+}
+
+/* Definindo a máscara */
+.mask-visible {
+  display: block;
+}
+
+.mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7); /* Cor da máscara com opacidade */
+  z-index: 10; /* Coloca a máscara na frente do conteúdo */
+  display: none; /* Inicialmente escondida */
+}
+
+/* Estilo para a sobreposição */
+.overlay-visible {
+  display: flex;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 20; /* Garante que o modal fique acima da máscara */
+  display: none; /* Inicialmente escondida */
+}
+
+/* Estilo para o modal (formulário) */
+.modal {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 30; /* Garante que o modal fique sobre a máscara */
+  width: 30%; /* Largura do modal */
+  height: 70%;
+  text-align: center;
+}
+
+.close {
+  display: block;
+  background: #af0000;
+  position: fixed;
+  top: 125px;
+  right: 660px;
+  border-color: transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  z-index: 31;
+  color: white;
+  padding: 0;
+}
+
+.close:hover {
+  background: darkred;
+}
+
+.close span {
+  font-size: 16px;
+  padding: 5px;
+  margin: 0;
+}
+
+.btn-add {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #4caf50;
+  color: white;
+  text-decoration: none;
+  border: 1px solid white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-add:hover {
+  background-color: #45a049;
+}
+
+.produtoForm {
+  height: 70%;
+  background: #fff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.produtoForm label {
+  font-weight: bold;
+  display: block;
+  margin-top: 10px;
+  text-align: left;
+}
+
+.produtoForm input[type="text"],
+.produtoForm input[type="number"],
+.produtoForm input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.produtoForm button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 30px;
+  transition: background 0.3s;
+}
+
+.produtoForm button[type="submit"] {
+  background: #4caf50;
+}
+
+.produtoForm button[type="submit"]:hover {
+  background: #45a049;
+}
+
+.produtoForm button[type="button"] {
+  background-color: red;
+}
+
+.produtoForm button[type="button"]:hover {
+  background-color: darkred;
+}
+
+.produtoForm img {
+  display: block;
+  margin: 10px 0;
+  max-width: 100px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.menu-lateral {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  border-right: 1px solid black;
+  width: 150px;
+  height: 100%;
+}
+
+.user-img {
+  width: 100px;
+  height: 100px;
+  border: 1px solid black;
+  border-radius: 50%;
+  margin: 10px 25px;
+}
+
+.user {
+  padding: 10px 30px;
+  margin: 0;
+}
+
+.logoff {
+  background: #af0000;
+  color: #fff;
+  font-size: 16px;
+  padding: 5px;
+  width: 90%;
+  margin: auto 8px;
+  cursor: pointer;
+  border: 1px solid #8b0000;
+  border-radius: 4px;
+}
+
+.logoff:hover {
+  opacity: 0.8;
+}
+
+/* Tabela */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px auto;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+table thead {
+  background: #4caf50;
+  color: white;
+}
+
+table tbody tr {
+  border-bottom: 1px solid #ddd;
+}
+
+table tbody tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+table th {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+table tbody td {
+  padding: 10px;
+}
+
+table tbody td:last-child {
+  text-align: center;
+}
+
+table tbody td img {
+  max-width: 80px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+}
+.excluir,
+.editar {
+  display: inline-block;
+  padding: 5px 10px;
+  margin-right: 5px;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.editar {
+  background: #2196f3;
+}
+
+.excluir:last-child {
+  background: #f44336;
+}
+
+.excluir:hover,
+.editar:hover {
+  opacity: 0.8;
+}

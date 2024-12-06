@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Login</title>
+    <link rel="stylesheet" href="./style.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+      integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="content first-content">
+        <div class="first-column">
+          <h2 class="title title-primary">Bem vindo de volta!</h2>
+          <div>
+            <p class="description description-primary">
+              Para se manter conectado conosco
+            </p>
+            <p class="description description-primary">
+              por favor faça login com suas informações pessoais
+            </p>
+          </div>
+          <button id="signin" class="btn btn-primary">Entrar</button>
+        </div>
+        <div class="second-column">
+          <h2 class="title title-second">Crie uma Conta</h2>
+          <form class="form" action="cadastro.php" method="post">
+            <label class="label-input" for="">
+              <i class="far fa-user icon-modify"></i>
+              <input type="text" name="usuario" placeholder="Nome" />
+            </label>
+
+            <label class="label-input" for="">
+              <i class="far fa-envelope icon-modify"></i>
+              <input type="email" name="email" placeholder="Email" />
+            </label>
+
+            <label class="label-input" for="">
+              <i class="fas fa-lock icon-modify"></i>
+              <input type="password" name="senha" placeholder="Senha" />
+            </label>
+
+            <button class="btn btn-second">Inscrever-se</button>
+          </form>
+        </div>
+        <!-- second column -->
+      </div>
+      <!-- first content -->
+      <div class="content second-content">
+        <div class="first-column">
+          <h2 class="title title-primary">olá, seja bem-vindo!</h2>
+          <div>
+            <p class="description description-primary">
+              Ainda não tem cadastro?
+            </p>
+            <p class="description description-primary">
+              Clique em inscrever-se e crie sua conta.
+            </p>
+          </div>
+          <button id="signup" class="btn btn-primary">Inscrever-se</button>
+        </div>
+        <div class="second-column">
+          <h2 class="title title-second">Entrar</h2>
+          <p class="description description-second">
+            Insira seus dados pessoais para acessar sua conta!
+          </p>
+          <form class="form" action="login.php" method="post">
+            <label class="label-input" for="">
+              <i class="far fa-envelope icon-modify"></i>
+              <input type="email" name="email" placeholder="Email" />
+            </label>
+
+            <label class="label-input" for="">
+              <i class="fas fa-lock icon-modify"></i>
+              <input type="password" name="senha" placeholder="Password" />
+            </label>
+
+            <a class="password" href="#">Esqueceu sua senha?</a>
+            <button class="btn btn-second">Entrar</button>
+          </form>
+        </div>
+        <!-- second column -->
+      </div>
+      <!-- second-content -->
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>

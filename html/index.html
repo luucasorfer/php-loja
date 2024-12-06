@@ -1,0 +1,202 @@
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Traça Livros</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@200"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <header>
+      <nav class="flex-container menu">
+        <div class="logo">
+          <img src="src/image/logo.png" alt="Logotipo" class="logo-img" />
+          <div class="logo-text">
+            <p>Traça Livros</p>
+            <p>Sua livraria online!</p>
+          </div>
+        </div>
+        <ul class="list-items">
+          <li><a href="#quem-somos">Inicio</a></li>
+          <li><a href="#servicos">Livros</a></li>
+          <li><a href="#planos">Quem Somos</a></li>
+        </ul>
+        <form class="divBusca" role="search">
+          <input
+            type="text"
+            id="search"
+            class="txtBusca"
+            placeholder="Procurar Livros"
+          />
+          <button type="submit" aria-label="Buscar">
+            <span class="material-symbols-outlined">search</span>
+          </button>
+        </form>
+        <div class="menu-login">
+          <a href="#" aria-label="Login">
+            <span class="material-symbols-outlined">person</span>
+          </a>
+          <a href="#" aria-label="Carrinho de compras">
+            <span class="material-symbols-outlined">shopping_bag</span>
+          </a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section
+        class="flex-container main"
+        id="presentation"
+        aria-label="Carrossel"
+      >
+        <div class="slider">
+          <div class="slide_group" style="transform: translateX(0%)">
+            <article class="slide">
+              <div class="texto">Texto do Slide 1</div>
+              <figure class="imagem">
+                <img
+                  src="https://via.placeholder.com/600x340?text=Imagem+1"
+                  alt="Imagem 1"
+                />
+              </figure>
+            </article>
+            <article class="slide">
+              <div class="texto">Texto do Slide 2</div>
+              <figure class="imagem">
+                <img
+                  src="https://via.placeholder.com/600x340?text=Imagem+2"
+                  alt="Imagem 2"
+                />
+              </figure>
+            </article>
+            <article class="slide">
+              <div class="texto">Texto do Slide 3</div>
+              <figure class="imagem">
+                <img
+                  src="https://via.placeholder.com/600x340?text=Imagem+3"
+                  alt="Imagem 3"
+                />
+              </figure>
+            </article>
+          </div>
+          <div class="directional_nav">
+            <button class="previous_btn" aria-label="Slide anterior">❮</button>
+            <button class="next_btn" aria-label="Próximo slide">❯</button>
+          </div>
+        </div>
+
+        <div
+          class="indicators"
+          role="tablist"
+          aria-label="Indicadores de slide"
+        >
+          <ul>
+            <li>
+              <button
+                class="indicator active"
+                data-slide="0"
+                aria-label="Slide 1"
+              ></button>
+            </li>
+            <li>
+              <button
+                class="indicator"
+                data-slide="1"
+                aria-label="Slide 2"
+              ></button>
+            </li>
+            <li>
+              <button
+                class="indicator"
+                data-slide="2"
+                aria-label="Slide 3"
+              ></button>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section
+        class="box-servicos"
+        id="servicos"
+        aria-labelledby="servicos-titulo"
+      >
+        <h2 id="servicos-titulo">Serviços</h2>
+        <div class="list-servicos">
+          <article class="item-servico o2">
+            <figure>
+              <img src="./img/icon-2.png" alt="Hospedagens" />
+            </figure>
+            <p>Hospedagens</p>
+            <a href="#">Comprar Agora</a>
+          </article>
+
+          <article class="item-servico o1">
+            <figure>
+              <img src="./img/icon-1.png" alt="Pacote de viagens" />
+            </figure>
+            <p>Pacotes de viagens</p>
+            <a href="#">Comprar Agora</a>
+          </article>
+
+          <article class="item-servico o3">
+            <figure>
+              <img src="./img/icon-3.png" alt="Roteiros personalizados" />
+            </figure>
+            <p>Roteiros personalizados</p>
+            <a href="#">Comprar Agora</a>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="flex-container footer">
+        <p>© 2022 CSS Flexbox • Bootcamp: Spread Fullstack Developer</p>
+        <p>Desenvolvido por: Lucas Fernandes</p>
+      </div>
+    </footer>
+    <script>
+      let slideIndex = 0;
+      const slides = document.querySelectorAll(".slide");
+      const totalSlides = slides.length;
+      const slideGroup = document.querySelector(".slide_group");
+      const indicators = document.querySelectorAll(".indicator");
+
+      // Função para mostrar o slide correto
+      function changeSlide() {
+        slideGroup.style.transform = `translateX(-${slideIndex * 100}%)`;
+
+        // Atualiza o estado dos indicadores
+        indicators.forEach((indicator) => indicator.classList.remove("active"));
+        indicators[slideIndex].classList.add("active");
+      }
+
+      // Botões de navegação
+      document.querySelector(".previous_btn").addEventListener("click", () => {
+        slideIndex = slideIndex === 0 ? totalSlides - 1 : slideIndex - 1;
+        changeSlide();
+      });
+
+      document.querySelector(".next_btn").addEventListener("click", () => {
+        slideIndex = slideIndex === totalSlides - 1 ? 0 : slideIndex + 1;
+        changeSlide();
+      });
+
+      // Clique nos indicadores
+      indicators.forEach((indicator) => {
+        indicator.addEventListener("click", () => {
+          slideIndex = parseInt(indicator.getAttribute("data-slide"));
+          changeSlide();
+        });
+      });
+
+      // Inicializa o carrossel com o primeiro slide
+      changeSlide();
+    </script>
+  </body>
+</html>
