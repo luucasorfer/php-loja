@@ -1,21 +1,33 @@
+:root {
+  --primary-color: #393280; /* Azul */
+  --secondary-color: #ed553b; /* Laranja */
+  --light-background: #ecf0f1; /* Cor de fundo clara */
+  --white-color: #fff; /* Branco */
+  --gray-color: #7f8c8d; /* Cinza */
+  --dark-gray: #393280; /* Cor escura */
+}
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap");
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
 body {
   font-family: "Open Sans", sans-serif;
 }
+
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #ecf0f1;
+  background-color: var(--light-background);
 }
+
 .content {
-  background-color: #fff;
+  background-color: var(--white-color);
   border-radius: 15px;
   width: 960px;
   height: 50%;
@@ -23,43 +35,51 @@ body {
   align-items: center;
   position: relative;
 }
+
 .content::before {
   content: "";
   position: absolute;
-  background-color: #ed553b;
+  background-color: var(--secondary-color);
   width: 40%;
   height: 100%;
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;
   left: 0;
 }
+
 .title {
   font-size: 28px;
   font-weight: bold;
   text-transform: capitalize;
 }
+
 .title-primary {
-  color: #fff;
+  color: var(--white-color);
 }
+
 .title-second {
-  color: #393280;
+  color: var(--primary-color);
 }
+
 .description {
   font-size: 14px;
   font-weight: 300;
   line-height: 22px;
 }
+
 .description-primary {
-  color: #fff;
+  color: var(--white-color);
 }
+
 .description-second {
-  color: #ed553b;
+  color: var(--secondary-color);
   font-weight: 500;
 }
+
 .btn {
   border-radius: 15px;
   text-transform: uppercase;
-  color: #fff;
+  color: var(--white-color);
   font-size: 10px;
   padding: 10px 35px;
   cursor: pointer;
@@ -69,32 +89,39 @@ body {
   border: none;
   margin-top: 1rem;
 }
+
 .btn-primary {
   background-color: transparent;
-  border: 1px solid #fff;
+  border: 1px solid var(--white-color);
   transition: background-color 0.5s;
 }
+
 .btn-primary:hover {
-  background-color: #fff;
-  color: #393280;
+  background-color: var(--white-color);
+  color: var(--primary-color);
 }
+
 .btn-second {
-  background-color: #393280;
+  background-color: var(--primary-color);
   border: 1px solid transparent;
   transition: background-color 0.5s;
 }
+
 .btn-second:hover {
-  background-color: #ed553b;
+  background-color: var(--secondary-color);
   border: 1px solid transparent;
-  color: #fff;
+  color: var(--white-color);
 }
+
 .first-content {
   display: flex;
-  box-shadow: -2px 8px 2px 8px rgba(0, 0, 255, 0.2);
+  box-shadow: 1px 4px 8px 4px rgba(0, 0, 255, 0.2);
 }
+
 .first-content .second-column {
   z-index: 11;
 }
+
 .first-column {
   display: flex;
   text-align: center;
@@ -104,60 +131,71 @@ body {
   flex-direction: column;
   justify-content: space-between;
 }
+
 .second-column {
   width: 60%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
 .form {
   display: flex;
   flex-direction: column;
   width: 55%;
+  margin-top: 18px;
 }
+
 .form input {
   height: 45px;
   width: 100%;
-  border: none;
-  background-color: #ecf0f1;
-  color: #393280;
+  border: 1px solid rgba(57, 50, 128, 0.5);
+  border-radius: 8px;
+  background-color: var(--light-background);
+  color: var(--primary-color);
   padding: 8px;
 }
+
 input:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0px 1000px #ecf0f1 inset !important;
+  -webkit-box-shadow: 0 0 0px 1000px var(--light-background) inset !important;
   -webkit-text-fill-color: #000 !important;
 }
+
 .label-input {
-  background-color: #ecf0f1;
+  background-color: var(--light-background);
   display: flex;
   align-items: center;
   margin: 8px;
 }
+
 .icon-modify {
-  color: #7f8c8d;
+  color: var(--gray-color);
   padding: 0 5px;
 }
 
-/* second content*/
-
+/* second content */
 .second-content {
   position: absolute;
   display: flex;
 }
+
 .second-content .first-column {
   order: 2;
   z-index: -1;
 }
+
 .second-content .second-column {
   order: 1;
   z-index: -1;
 }
+
 .password {
-  color: #393280;
+  color: var(--primary-color);
   font-size: 14px;
   margin: 15px 0;
   text-align: center;
 }
+
 .password::first-letter {
   text-transform: capitalize;
 }
@@ -169,6 +207,7 @@ input:-webkit-autofill {
 .sign-in-js .second-content .second-column {
   z-index: 11;
 }
+
 .sign-in-js .second-content .first-column {
   z-index: 13;
 }
@@ -179,15 +218,14 @@ input:-webkit-autofill {
   border-bottom-left-radius: 0;
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
-  animation: slidein 1.3s; /*MODIFIQUEI DE 3s PARA 1.3s*/
+  animation: slidein 1.3s linear;
   z-index: 12;
-  /* box-shadow: -2px 8px 2px 8px rgba(0, 0, 255, .2); */
 }
 
 .sign-up-js .content::before {
-  animation: slideout 1.3s; /*MODIFIQUEI DE 3s PARA 1.3s*/
+  animation: slideout 1.3s linear;
   z-index: 12;
-  background-color: #393280;
+  background-color: var(--primary-color);
 }
 
 .sign-up-js .second-content .first-column,
@@ -203,21 +241,20 @@ input:-webkit-autofill {
   z-index: 13;
 }
 
-/* DESLOCAMENTO CONTEÚDO ATRÁS DO CONTENT:BEFORE*/
+/* DESLOCAMENTO CONTEÚDO ATRÁS DO CONTENT:BEFORE */
 .sign-in-js .first-content .second-column {
   z-index: -1;
   position: relative;
-  animation: deslocamentoEsq 1.3s; /*MODIFIQUEI DE 3s PARA 1.3s*/
+  animation: deslocamentoEsq 1.3s linear;
 }
 
 .sign-up-js .second-content .second-column {
   position: relative;
   z-index: -1;
-  animation: deslocamentoDir 1.3s; /*MODIFIQUEI DE 3s PARA 1.3s*/
+  animation: deslocamentoDir 1.3s linear;
 }
 
-/*ANIMAÇÃOO CSS PARA O CONTEÚDO*/
-
+/* ANIMAÇÃO CSS PARA O CONTEÚDO */
 @keyframes deslocamentoEsq {
   from {
     left: 0;
@@ -228,13 +265,11 @@ input:-webkit-autofill {
   25% {
     left: -80px;
     opacity: 0.5;
-    /* z-index: 12; NÃO HÁ NECESSIDADE */
   }
 
   50% {
     left: -100px;
     opacity: 0.2;
-    /* z-index: 12; NÃO HÁ NECESSIDADE */
   }
 
   to {
@@ -252,13 +287,10 @@ input:-webkit-autofill {
 
   25% {
     left: 80px;
-    /* z-index: 12;  NÃO HÁ NECESSIDADE*/
   }
 
   50% {
     left: 100px;
-    /* z-index: 12; NÃO HÁ NECESSIDADE*/
-    /* background-color: yellow;  Exemplo que dei no vídeo*/
   }
 
   to {
@@ -267,8 +299,7 @@ input:-webkit-autofill {
   }
 }
 
-/*ANIMAÇÃO CSS*/
-
+/* ANIMAÇÃO CSS */
 @keyframes slidein {
   from {
     left: 0;
@@ -320,157 +351,5 @@ input:-webkit-autofill {
   to {
     left: 0;
     width: 40%;
-  }
-}
-
-/*VERSÃO MOBILE*/
-@media screen and (max-width: 1040px) {
-  .content {
-    width: 100%;
-    height: 100%;
-  }
-
-  .content::before {
-    width: 100%;
-    height: 40%;
-    top: 0;
-    border-radius: 0;
-  }
-  .first-content,
-  .second-content {
-    flex-direction: column;
-    justify-content: space-around;
-  }
-
-  .first-column,
-  .second-column {
-    width: 100%;
-  }
-
-  .sign-in-js .content::before {
-    top: 60%;
-    left: 0;
-    border-radius: 0;
-  }
-
-  .form {
-    width: 90%;
-  }
-
-  /* ANIMAÇÃO MOBILE CSS*/
-
-  @keyframes deslocamentoEsq {
-    from {
-      top: 0;
-      opacity: 1;
-      z-index: 12;
-    }
-
-    25% {
-      top: -80px;
-      opacity: 0.5;
-      /* z-index: 12; NÃO HÁ NECESSIDADE */
-    }
-
-    50% {
-      top: -100px;
-      opacity: 0.2;
-      /* z-index: 12; NÃO HÁ NECESSIDADE */
-    }
-
-    to {
-      top: -110px;
-      opacity: 0;
-      z-index: -1;
-    }
-  }
-
-  @keyframes deslocamentoDir {
-    from {
-      top: 0;
-      z-index: 12;
-    }
-
-    25% {
-      top: 80px;
-      /* z-index: 12;  NÃO HÁ NECESSIDADE*/
-    }
-
-    50% {
-      top: 100px;
-      /* z-index: 12; NÃO HÁ NECESSIDADE*/
-      /* background-color: yellow;  Exemplo que dei no vídeo*/
-    }
-
-    to {
-      top: 110px;
-      z-index: -1;
-    }
-  }
-
-  @keyframes slidein {
-    from {
-      top: 0;
-      height: 40%;
-    }
-
-    25% {
-      top: 5%;
-      height: 50%;
-    }
-
-    50% {
-      top: 25%;
-      height: 60%;
-    }
-
-    75% {
-      top: 45%;
-      height: 50%;
-    }
-
-    to {
-      top: 60%;
-      height: 40%;
-    }
-  }
-
-  @keyframes slideout {
-    from {
-      top: 60%;
-      height: 40%;
-    }
-
-    25% {
-      top: 45%;
-      height: 50%;
-    }
-
-    50% {
-      top: 25%;
-      height: 60%;
-    }
-
-    75% {
-      top: 5%;
-      height: 50%;
-    }
-
-    to {
-      top: 0;
-      height: 40%;
-    }
-  }
-}
-
-@media screen and (max-width: 740px) {
-  .form {
-    width: 50%;
-  }
-}
-
-@media screen and (max-width: 425px) {
-  .form {
-    width: 100%;
   }
 }

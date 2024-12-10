@@ -4,6 +4,16 @@ include("config.php");
 // Começa a sessão
 session_start();
 
+// Função para apresentar a mensagem e redirecionar para a pagina desejada
+function redirectWithAlert($message, $url)
+{
+  echo "<script>
+          alert('$message');
+          window.location.href = '$url';
+        </script>";
+  exit();  // Garantir que o script pare após o redirecionamento
+}
+
 // Tratando o formulário de login:
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email'])) {
   // Obter os dados do formulário
@@ -24,39 +34,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email'])) {
       $_SESSION['email'] = $row['email'];
       $_SESSION['usuario'] = $row['usuario'];
 
-      if ($email === 'admin@teste.com') {
-        echo "<script>
-                    alert('Login realizado com sucesso! Bem-vindo, " . $row['usuario'] . "!');
-                    window.location.href = '../../gerenciamento.php';
-                    </script>";
-      } else {
-        echo "<script>
-                    alert('Login realizado com sucesso! Bem-vindo, " . $row['usuario'] . "!');
-                    window.location.href = '../../index.html';
-                    </script>";
-      }
-    } else {
+      if ($email === 'admin@teste.com')
+        redirectWithAlert('Login realizado com sucesso! Bem-vindo, ' . $_SESSION['usuario'] . '!', '../../gerenciamento.php');
+      else redirectWithAlert('Login realizado com sucesso! Bem-vindo, ' . $_SESSION['usuario'] . '!', '../../index.html');
+    } else
       // Senha incorreta
-      echo "<script> 
-                alert('Senha incorreta.'); 
-                window.location.href = '../../loginCadastro.html';
-            </script>";
-    }
-  } else {
+      redirectWithAlert('Senha incorreta!', '../../loginCadastro.html');
+  } else
     // E-mail não encontrado
-    echo "<script> 
-            alert('E-mail não encontrado.'); 
-            window.location.href = '../../loginCadastro.html';
-        </script>";
-  }
-}
-
-// Tratando logout
-if (isset($_GET['logout'])) {
-  // Destroi a sessão
-  session_destroy();
-  // Redireciona para a página de login
-  echo "<script> window.location.href = '../../loginCadastro.html'; </script>";
+    redirectWithAlert('E-mail não encontrado.', '../../loginCadastro.html');
 }
 
 $conn->close();

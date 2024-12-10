@@ -7,10 +7,10 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@200"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./src/style/index.css" />
   </head>
 
-  <body>
+  <body cz-shortcut-listen="true">
     <header>
       <nav class="flex-container menu">
         <div class="logo">
@@ -21,8 +21,8 @@
           </div>
         </div>
         <ul class="list-items">
-          <li><a href="#quem-somos">Inicio</a></li>
-          <li><a href="#servicos">Livros</a></li>
+          <li><a href="#home">Inicio</a></li>
+          <li><a href="#produtosNovos">Livros</a></li>
           <li><a href="#planos">Quem Somos</a></li>
         </ul>
         <form class="divBusca" role="search">
@@ -37,7 +37,7 @@
           </button>
         </form>
         <div class="menu-login">
-          <a href="#" aria-label="Login">
+          <a href="./loginCadastro.html" aria-label="Login">
             <span class="material-symbols-outlined">person</span>
           </a>
           <a href="#" aria-label="Carrinho de compras">
@@ -48,11 +48,7 @@
     </header>
 
     <main>
-      <section
-        class="flex-container main"
-        id="presentation"
-        aria-label="Carrossel"
-      >
+      <section class="flex-container main" id="home" aria-label="Carrossel">
         <div class="slider">
           <div class="slide_group" style="transform: translateX(0%)">
             <article class="slide">
@@ -84,6 +80,15 @@
                 <img
                   src="https://via.placeholder.com/600x340?text=Imagem+3"
                   alt="Imagem 3"
+                />
+              </figure>
+            </article>
+            <article class="slide">
+              <div class="texto">Texto do Slide 3</div>
+              <figure class="imagem">
+                <img
+                  src="https://via.placeholder.com/600x340?text=Imagem+4"
+                  alt="Imagem 4"
                 />
               </figure>
             </article>
@@ -121,19 +126,26 @@
                 aria-label="Slide 3"
               ></button>
             </li>
+            <li>
+              <button
+                class="indicator"
+                data-slide="4"
+                aria-label="Slide 4"
+              ></button>
+            </li>
           </ul>
         </div>
       </section>
 
       <section
-        class="box-servicos"
-        id="servicos"
-        aria-labelledby="servicos-titulo"
+        class="box-produtosNovos"
+        id="produtosNovos"
+        aria-labelledby="produtosNovos-titulo"
       >
-        <h2 id="servicos-titulo">livros recem chegados</h2>
+        <h2 id="produtosNovos-titulo">livros recem chegados</h2>
 
-        <div class="list-servicos">
-          <article class="item-servico o1">
+        <div class="list-produtosNovos">
+          <article class="item-produtoNovo o1">
             <figure class="produtos">
               <img src="./img/icon-1.png" alt="Pacote de viagens" />
               <div class="middle"><a href="#">Comprar Agora</a></div>
@@ -143,7 +155,7 @@
             <p class="preco">R$ 40.00</p>
           </article>
 
-          <article class="item-servico o2">
+          <article class="item-produtoNovo o2">
             <figure class="produtos">
               <img src="./img/icon-2.png" alt="Hospedagens" />
               <div class="middle"><a href="#">Comprar Agora</a></div>
@@ -153,7 +165,7 @@
             <p class="preco">R$ 38.00</p>
           </article>
 
-          <article class="item-servico o3">
+          <article class="item-produtoNovo o3">
             <figure class="produtos">
               <img src="./img/icon-3.png" alt="Roteiros personalizados" />
               <div class="middle"><a href="#">Comprar Agora</a></div>
@@ -163,7 +175,7 @@
             <p class="preco">R$ 45.00</p>
           </article>
 
-          <article class="item-servico o4">
+          <article class="item-produtoNovo o4">
             <figure class="produtos">
               <img src="./img/icon-1.png" alt="Pacote de viagens" />
               <div class="middle"><a href="#">Comprar Agora</a></div>

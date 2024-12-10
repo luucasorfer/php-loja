@@ -1,29 +1,61 @@
 <?php
-include 'src/php/crud.php'; // Incluir as funções CRUD
+// Iniciar a sessão
+session_start();
 
-$statusMessage = null;
+// Verificar se o usuário está logado
+if (!isset($_SESSION['email'])) {
+  // Se não estiver logado, redirecionar para a página de login
+  header('Location: loginCadastro.html');
+  exit(); // Certifique-se de que o script não continue após o redirecionamento
+} else {
 
-// Verificar se o formulário foi enviado para incluir ou editar produtos
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  $id = isset($_POST['id']) ? $_POST['id'] : null;
-  $nome = $_POST['nome'];
-  $preco = $_POST['preco'];
-  $quantidade = $_POST['quantidade'];
-  $imagem = $_FILES['imagem'];
+  include 'src/php/crud.php'; // Incluir as funções CRUD
 
-  if ($id) {
-    // Editar produto
-    $statusMessage = editarProdutos($id, $nome, $preco, $quantidade, $imagem);
-  } else {
-    // Incluir produto
-    $statusMessage = incluirProdutos($nome, $preco, $quantidade, $imagem);
+  $statusMessage = null;
+
+  // Verificar se o formulário foi enviado para incluir ou editar produtos
+  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $id = isset($_POST['id']) ? $_POST['id'] : null;
+    $nome = $_POST['nome'];
+    $preco = $_POST['preco'];
+    $quantidade = $_POST['quantidade'];
+    $imagem = $_FILES['imagem'];
+
+    if ($id) {
+      // Editar produto
+      $statusMessage = editarProdutos($id, $nome, $preco, $quantidade, $imagem);
+    } else {
+      // Incluir produto
+      $statusMessage = incluirProdutos($nome, $preco, $quantidade, $imagem);
+    }
+    // Armazena a mensagem de status na sessão
+    $_SESSION['statusMessage'] = $statusMessage;
+    // Redireciona após excluir
+    header('Location: gerenciamento.php');
+    exit(); // Certifique-se de que o script não continue após o redirecionamento
+  }
+
+  // Verificar se foi pedido para excluir um produto
+  if (isset($_GET['excluir'])) {
+    $id = $_GET['excluir'];
+    $statusMessage = excluirProdutos($id);
+
+    // Armazena a mensagem de status na sessão
+    $_SESSION['statusMessage'] = $statusMessage;
+    // Redireciona após excluir
+    header('Location: gerenciamento.php');
+    exit(); // Certifique-se de que o script não continue após o redirecionamento
   }
 }
 
-// Verificar se foi pedido para excluir um produto
-if (isset($_GET['excluir'])) {
-  $id = $_GET['excluir'];
-  $statusMessage = excluirProdutos($id);
+// Verificar se foi solicitado logout
+if (isset($_GET['logout'])) {
+  // Destroi a sessão
+  session_destroy();
+
+  // Redireciona para a página de login
+  header('Location: loginCadastro.html');
+  exit();
 }
 ?>
 
@@ -35,15 +67,17 @@ if (isset($_GET['excluir'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cadastro de Produtos</title>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-  <link rel="stylesheet" href="./src/style/styleCrud.css" />
+  <link rel="stylesheet" href="./src/style/gerenciamento.css" />
 </head>
 
 <body>
 
-  <?php if ($statusMessage): ?>
+  <?php if (isset($_SESSION['statusMessage'])): ?>
     <script>
-      alert("<?php echo $statusMessage['message']; ?>");
+      alert("<?php echo $_SESSION['statusMessage']['message']; ?>");
     </script>
+    <?php unset($_SESSION['statusMessage']); // Limpa a mensagem da sessão 
+    ?>
   <?php endif; ?>
 
   <div class="mask" id="mask"></div>
@@ -74,11 +108,14 @@ if (isset($_GET['excluir'])) {
 
   <!-- Barra lateral -->
   <nav class="menu-lateral">
-    <img class="user-img" />
-    <p class="user">Bem-vindo, Admin!</p>
-    <form method="GET" action="">
+    <img class="user-img" src="./src/image/user-img.svg" />
+    <p class="user">Bem-vindo,
+      <span class="nome-usuario"><?php echo $_SESSION['usuario']; ?> !</span>
+    </p>
+    <form method="GET" action="gerenciamento.php">
       <button class="logoff" name="logout">Sair</button>
     </form>
+
   </nav>
 
   <div class="content">
@@ -107,7 +144,7 @@ if (isset($_GET['excluir'])) {
                                 <td>{$produto['nome']}</td>
                                 <td>R$ {$produto['preco']}</td>
                                 <td>{$produto['quantidade']}</td>
-                                <td><img src='./src/image/{$produto['imagem']}' alt='Imagem do produto' /></td>
+                                <td><img src='{$pastaImagem}{$produto['imagem']}' alt='Imagem do produto' /></td>
                                 <td class='actions'>
                                     <a class='editar' onclick='editarProduto({$produto['id']}, \"{$produto['nome']}\", {$produto['preco']}, {$produto['quantidade']}, \"{$produto['imagem']}\")'>Editar</a>
                                     <a class='excluir' href='?excluir={$produto['id']}' onclick='return confirm(\"Tem certeza que deseja excluir?\")'>Excluir</a>
@@ -122,34 +159,7 @@ if (isset($_GET['excluir'])) {
     </table>
   </div>
 
-  <script>
-    const mask = document.getElementById("mask");
-    const overlay = document.getElementById("overlay");
-
-    function openForm() {
-      // Exibir o modal
-      mask.style.display = "block";
-      overlay.style.display = "flex";
-    }
-
-    function closeForm() {
-      // Limpar os dados do formulário
-      document.getElementById("produtoForm").reset();
-      // Esconder o modal
-      mask.style.display = "none";
-      overlay.style.display = "none";
-    }
-
-    function editarProduto(id, nome, preco, quantidade, imagem) {
-      document.getElementById("productId").value = id;
-      document.getElementById("nome").value = nome;
-      document.getElementById("preco").value = preco;
-      document.getElementById("quantidade").value = quantidade;
-      // Limpa o campo de imagem
-      document.getElementById("imagem").value = '';
-      openForm();
-    }
-  </script>
+  <script src="./src/js/scriptModal.js"></script>
 </body>
 
 </html>
