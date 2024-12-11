@@ -41,6 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 if (isset($_GET['excluir'])) {
+  $id = $_GET['excluir'];
   $statusMessage = excluirProdutos($id);
 
   // Armazena a mensagem de status na sessão
@@ -88,7 +89,7 @@ if (isset($_GET['logoff'])) {
     </button>
     <div class="modal">
       <!-- Formulário para adicionar/editar produtos -->
-      <form id="produtoForm" class="produtoForm" method="POST" enctype="multipart/form-data" onsubmit="return validarFormulario()">
+      <form id="produtoForm" class="produtoForm" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="id" id="productId" />
         <label for="nome">Nome:</label>
         <input type="text" name="nome" id="nome" required />
