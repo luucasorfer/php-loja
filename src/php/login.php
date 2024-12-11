@@ -9,8 +9,10 @@ function redirectWithAlert($message, $url)
 {
   echo "<script>
           alert('$message');
-          window.location.href = '$url';
         </script>";
+
+  // Redireciona para a página de login
+  header('Location: ' . $url);
   exit();  // Garantir que o script pare após o redirecionamento
 }
 
@@ -36,7 +38,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email'])) {
 
       if ($email === 'admin@teste.com')
         redirectWithAlert('Login realizado com sucesso! Bem-vindo, ' . $_SESSION['usuario'] . '!', '../../gerenciamento.php');
-      else redirectWithAlert('Login realizado com sucesso! Bem-vindo, ' . $_SESSION['usuario'] . '!', '../../index.html');
+      else
+        redirectWithAlert('Login realizado com sucesso! Bem-vindo, ' . $_SESSION['usuario'] . '!', '../../index.html');
     } else
       // Senha incorreta
       redirectWithAlert('Senha incorreta!', '../../loginCadastro.html');

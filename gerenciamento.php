@@ -42,9 +42,9 @@ if (!isset($_SESSION['email'])) {
 
     // Armazena a mensagem de status na sessão
     $_SESSION['statusMessage'] = $statusMessage;
-    // Redireciona após excluir
-    header('Location: gerenciamento.php');
-    exit(); // Certifique-se de que o script não continue após o redirecionamento
+    // Redireciona para a página de login
+    header('Location: ' . $_SERVER['PHP_SELF']);
+    exit(); // Garantir que o script pare após o redirecionamento
   }
 }
 
@@ -54,7 +54,7 @@ if (isset($_GET['logout'])) {
   session_destroy();
 
   // Redireciona para a página de login
-  header('Location: loginCadastro.html');
+  header('Location: ' . $_SERVER['PHP_SELF']);
   exit();
 }
 ?>
