@@ -1,5 +1,6 @@
 <?php
-include 'src/php/crud.php'; // Incluir as funções CRUD
+// Incluir as funções CRUD
+include 'src/php/crud.php';
 
 // Iniciar a sessão
 session_start();
@@ -17,7 +18,7 @@ if (!$_SESSION['email']) {
 
 $statusMessage = null;
 
-// Verificar se o formulário foi enviado para incluir ou editar produtos
+// Verificar o formulário que esta sendo enviado para incluir ou editar produtos
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $id = isset($_POST['id']) ? $_POST['id'] : null;
   $nome = $_POST['nome'];
@@ -39,9 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   exit();
 }
 
-// Verificar se foi pedido para excluir um produto
 if (isset($_GET['excluir'])) {
-  $id = $_GET['excluir'];
   $statusMessage = excluirProdutos($id);
 
   // Armazena a mensagem de status na sessão
@@ -51,8 +50,6 @@ if (isset($_GET['excluir'])) {
   exit();
 }
 
-
-// Verificar se foi solicitado logout
 if (isset($_GET['logoff'])) {
   // Destroi a sessão
   session_destroy();

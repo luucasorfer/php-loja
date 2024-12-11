@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email'])) {
       $_SESSION['email'] = $row['email'];
       $_SESSION['usuario'] = $row['usuario'];
 
-      if ($email === 'admin@teste.com')
+      if ($_SESSION['email'] === 'admin@teste.com')
         redirectWithAlert('Login realizado com sucesso! Bem-vindo, ' . $_SESSION['usuario'] . '!', '../../gerenciamento.php');
       else
         redirectWithAlert('Login realizado com sucesso! Bem-vindo, ' . $_SESSION['usuario'] . '!', '../../index.html');
