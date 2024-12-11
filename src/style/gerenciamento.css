@@ -214,8 +214,10 @@ h2 {
   color: #fff;
   font-size: 16px;
   padding: 5px;
-  width: 90%;
-  margin: auto 8px;
+  margin: 4px auto;
+  width: 80%;
+  text-decoration: none;
+  text-align: center;
   cursor: pointer;
   border: 1px solid #8b0000;
   border-radius: 4px;

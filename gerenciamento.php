@@ -1,60 +1,64 @@
 <?php
+include 'src/php/crud.php'; // Incluir as funções CRUD
+
 // Iniciar a sessão
 session_start();
 
 // Verificar se o usuário está logado
-if (!isset($_SESSION['email'])) {
-  // Se não estiver logado, redirecionar para a página de login
+if (!$_SESSION['email']) {
+  // redirecionado para o login
   header('Location: loginCadastro.html');
-  exit(); // Certifique-se de que o script não continue após o redirecionamento
-} else {
-
-  include 'src/php/crud.php'; // Incluir as funções CRUD
-
-  $statusMessage = null;
-
-  // Verificar se o formulário foi enviado para incluir ou editar produtos
-  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $id = isset($_POST['id']) ? $_POST['id'] : null;
-    $nome = $_POST['nome'];
-    $preco = $_POST['preco'];
-    $quantidade = $_POST['quantidade'];
-    $imagem = $_FILES['imagem'];
-
-    if ($id) {
-      // Editar produto
-      $statusMessage = editarProdutos($id, $nome, $preco, $quantidade, $imagem);
-    } else {
-      // Incluir produto
-      $statusMessage = incluirProdutos($nome, $preco, $quantidade, $imagem);
-    }
-    // Armazena a mensagem de status na sessão
-    $_SESSION['statusMessage'] = $statusMessage;
-    // Redireciona após excluir
-    header('Location: gerenciamento.php');
-    exit(); // Certifique-se de que o script não continue após o redirecionamento
-  }
-
-  // Verificar se foi pedido para excluir um produto
-  if (isset($_GET['excluir'])) {
-    $id = $_GET['excluir'];
-    $statusMessage = excluirProdutos($id);
-
-    // Armazena a mensagem de status na sessão
-    $_SESSION['statusMessage'] = $statusMessage;
-    // Redireciona para a página de login
-    header('Location: ' . $_SERVER['PHP_SELF']);
-    exit(); // Garantir que o script pare após o redirecionamento
-  }
+  exit;
+} elseif ($_SESSION['email'] !== 'admin@teste.com') {
+  // redirecionado para o home
+  header('Location: index.html');
+  exit;
 }
 
+$statusMessage = null;
+
+// Verificar se o formulário foi enviado para incluir ou editar produtos
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  $id = isset($_POST['id']) ? $_POST['id'] : null;
+  $nome = $_POST['nome'];
+  $preco = $_POST['preco'];
+  $quantidade = $_POST['quantidade'];
+  $imagem = $_FILES['imagem'];
+
+  if ($id) {
+    // Editar produto
+    $statusMessage = editarProdutos($id, $nome, $preco, $quantidade, $imagem);
+  } else {
+    // Incluir produto
+    $statusMessage = incluirProdutos($nome, $preco, $quantidade, $imagem);
+  }
+  // Armazena a mensagem de status na sessão
+  $_SESSION['statusMessage'] = $statusMessage;
+  // Redireciona após incluir ou edidtar
+  header('Location: ' . $_SERVER['PHP_SELF']);
+  exit();
+}
+
+// Verificar se foi pedido para excluir um produto
+if (isset($_GET['excluir'])) {
+  $id = $_GET['excluir'];
+  $statusMessage = excluirProdutos($id);
+
+  // Armazena a mensagem de status na sessão
+  $_SESSION['statusMessage'] = $statusMessage;
+  // Redireciona para a página de login
+  header('Location: ' . $_SERVER['PHP_SELF']);
+  exit();
+}
+
+
 // Verificar se foi solicitado logout
-if (isset($_GET['logout'])) {
+if (isset($_GET['logoff'])) {
   // Destroi a sessão
   session_destroy();
 
   // Redireciona para a página de login
-  header('Location: ' . $_SERVER['PHP_SELF']);
+  header('Location: loginCadastro.html');
   exit();
 }
 ?>
@@ -112,10 +116,7 @@ if (isset($_GET['logout'])) {
     <p class="user">Bem-vindo,
       <span class="nome-usuario"><?php echo $_SESSION['usuario']; ?> !</span>
     </p>
-    <form method="GET" action="gerenciamento.php">
-      <button class="logoff" name="logout">Sair</button>
-    </form>
-
+    <a href='?logoff' class="logoff">Sair</a>
   </nav>
 
   <div class="content">
